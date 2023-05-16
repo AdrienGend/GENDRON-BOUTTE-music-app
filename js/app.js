@@ -1,34 +1,31 @@
-const cors = require('cors');
+let homepage = `<div style="color: #fff">
+test app
+</div>
+<button id="btn_changepage">changement de page</button>
+`;
 
-app.use(cors());
+let searchpage = `<input type="text" id="search_input" placeholder="Rechercher une musique">
+`;
 
-document.addEventListener('DOMContentLoaded', function() {
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM chargé');
     
-    const home_btn = document.getElementById('home_btn');
-    const search_btn = document.getElementById('search_btn');
-    const lib_btn = document.getElementById('lib_btn');
+    const bouton_accueil = document.getElementById('home_btn');
+    const bouton_recherche = document.getElementById('search_btn');
+    const bouton_biblio = document.getElementById('lib_btn');
 
-    home_btn.addEventListener('click', () => {
-        fetch('html/home.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('app_ctn').innerHTML = data;
-            });
+    bouton_accueil.addEventListener('click', () => {
+        document.getElementById('app_ctn').innerHTML = homepage;
     });
 
-    // Identifiant client Spotify API : a1e952d70faf431993ea9dce2b15a001
-    // https://developer.spotify.com/documentation/web-api/reference/#category-search
-    // Il y avait une erreur de syntaxe dans les en-têtes, il manquait une virgule après "Client-ID"
-    // et Access-Control-Allow-Origin n'est pas nécessaire ici.
-    fetch('https://api.spotify.com/v1/search?q=metal&type=track', {
-        method: 'GET',
-        headers: { 
-            "Client-ID": "a1e952d70faf431993ea9dce2b15a001",
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
+    bouton_recherche.addEventListener('click', () => {      
+        document.getElementById('app_ctn').innerHTML = searchpage;
     });
 
-});
+      
+  });
+
+
+  
